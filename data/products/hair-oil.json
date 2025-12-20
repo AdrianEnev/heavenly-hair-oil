@@ -1,0 +1,74 @@
+{
+    "id": "hair-oil-1",
+    "slug": "heavenly-hair-oil",
+    "name": "Heavenly Hair Oil",
+    "subtitle": "Deep nourishment, light lamination, signature shine",
+    "shortDescription": "A lightweight blend of organic oils that deeply nourishes, softens and adds healthy shine — especially to the ends.",
+    "longDescription": "Our signature Heavenly Hair Oil is crafted with a luxurious blend of natural organic oils designed to transform dry, dull strands into glossy, touchably soft hair. Experience a light lamination effect that seals in moisture without weighing your hair down. Perfect for revitalizing split ends and adding a brilliant, healthy-looking shine to every strand.",
+    "colors": {
+        "brand": "#2C0F3B",
+        "accent": "#D9A1AB"
+    },
+    "images": [
+        {
+            "src": "/images/hair_oil_front.jpeg",
+            "alt": "Heavenly Hair Oil bottle on marble"
+        },
+        {
+            "src": "/images/hair_oil_back.jpeg",
+            "alt": "Heavenly Hair Oil close-up"
+        }
+    ],
+    "ingredients": [
+        {
+            "name": "Grape Seed Oil",
+            "note": "Shine without weighing your hair down"
+        },
+        {
+            "name": "Camellia Oil",
+            "note": "Provides hair with hydration and nourishment"
+        },
+        {
+            "name": "Rosemary Oil",
+            "note": "Stimulates hair follicles and improves blood circulation to the scalp"
+        },
+        {
+            "name": "Vitamin E",
+            "note": "Promotes healthy hair growth"
+        },
+        {
+            "name": "Ginger Oil",
+            "note": "Supports hair retention"
+        },
+        {
+            "name": "Turmeric Root",
+            "note": "Leads to increased hair growth"
+        }
+    ],
+    "amazonUrl": "https://www.amazon.example/product",
+    "etsyUrl": "https://www.etsy.example/product",
+    "reviews": [
+        {
+            "id": "r1",
+            "name": "Maya",
+            "photo": "",
+            "rating": 5,
+            "quote": "Deeply softens the hair and makes my ends feel renewed."
+        },
+        {
+            "id": "r2",
+            "name": "Lea",
+            "photo": "",
+            "rating": 5,
+            "quote": "Gives a light lamination effect after washing — hair looks glossy."
+        },
+        {
+            "id": "r3",
+            "name": "Noor",
+            "photo": "",
+            "rating": 5,
+            "quote": "Leaves hair shiny and healthy-looking; deeply nourishes the strands."
+        }
+    ],
+    "createdAt": "2025-12-01"
+}

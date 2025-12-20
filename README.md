@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Heavenly Hair Oil Website
+
+A premium, single-product portfolio website built with Next.js, Tailwind CSS, and TypeScript. Designed for a luxury hair oil brand with a focus on aesthetics, performance, and accessibility.
+
+## key Features
+
+- **Minimal Luxury Design**: Custom color tokens (Deep Purple, Dusty Pink).
+- **Mobile-First**: Fully responsive layouts.
+- **SEO Optimized**: JSON-LD Product Schema, meta tags.
+- **Accessible**: Semantic HTML, visible focus states, WCAG compliant contrast.
+- **No E-commerce Backend**: Direct links to Amazon and Etsy.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js (v18+)
+- npm
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Editing Content
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The website content is driven by a JSON file located at `data/products/hair-oil.json`.
 
-## Learn More
+### Changing Text & Links
+Edit `data/products/hair-oil.json` to update:
+- **Product Name/Subtitle**: `name`, `subtitle`
+- **Descriptions**: `shortDescription`, `longDescription`
+- **Purchase Links**: `amazonUrl`, `etsyUrl`
+- **Reviews**: Add or remove objects in the `reviews` array.
 
-To learn more about Next.js, take a look at the following resources:
+### Replacing Images
+1. Place your new images in the `public/images/` folder (create `images` folder if missing).
+2. Update the paths in `data/products/hair-oil.json`:
+   - `images`: Array of product images.
+   - `reviews`: `photo` field for each review.
+   
+   To use the placeholder images provided in the design logic, ensure `src` is empty strings or valid paths.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Adding a Second Product
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Currently, the site is optimized for a single featured product on the homepage. To add more:
+1. Create a new JSON file in `data/products/` (e.g., `shampoo.json`).
+2. Update `data/products/index.ts` (if you create a registry) or manually import it where needed.
+3. You will need to create a new page route (e.g., `app/products/[slug]/page.tsx`) to display multiple products, as the Homepage (`app/page.tsx`) is currently hardcoded to import `hair-oil.json`.
 
-## Deploy on Vercel
+## Testing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Run unit tests and accessibility checks:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm test
+```
+
+## Deployment
+
+The project is ready for deployment on Vercel.
+
+1. Push code to GitHub/GitLab.
+2. Import project into Vercel.
+3. Vercel will auto-detect Next.js and deploy.
+
+### Build Locally
+
+```bash
+npm run build
+npm start
+```
