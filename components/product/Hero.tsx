@@ -12,7 +12,7 @@ export function Hero() {
                 <div className="absolute -bottom-[20%] -left-[10%] w-[600px] h-[600px] bg-[var(--color-dusty-pink)]/10 rounded-full blur-3xl" />
             </div>
 
-            <div className="container relative z-10 mx-auto px-4 md:px-6 py-20">
+            <div className="container relative z-10 mx-auto px-4 md:px-6 pt-32 pb-20 md:py-24">
                 <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 items-center">
                     {/* Text Content */}
                     <div className="flex flex-col justify-center space-y-8 lg:order-1 order-2">

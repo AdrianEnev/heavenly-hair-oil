@@ -2,9 +2,9 @@
     "id": "hair-oil-1",
     "slug": "heavenly-hair-oil",
     "name": "Heavenly Hair Oil",
-    "subtitle": "Deep nourishment, light lamination, signature shine",
+    "subtitle": "Deep nourishment, instant polish, signature shine",
     "shortDescription": "A lightweight blend of organic oils that deeply nourishes, softens and adds healthy shine — especially to the ends.",
-    "longDescription": "Our signature Heavenly Hair Oil is crafted with a luxurious blend of natural organic oils designed to transform dry, dull strands into glossy, touchably soft hair. Experience a light lamination effect that seals in moisture without weighing your hair down. Perfect for revitalizing split ends and adding a brilliant, healthy-looking shine to every strand.",
+    "longDescription": "Our signature Heavenly Hair Oil is crafted with a luxurious blend of natural organic oils designed to transform dry, dull strands into glossy, touchably soft hair. Experience a glass-like finish that seals in moisture without weighing your hair down. Perfect for revitalizing split ends and adding a brilliant, healthy-looking shine to every strand.",
     "colors": {
         "brand": "#2C0F3B",
         "accent": "#D9A1AB"
@@ -53,21 +53,21 @@
             "name": "Maya",
             "photo": "",
             "rating": 5,
-            "quote": "Deeply softens the hair and makes my ends feel renewed."
+            "quote": "I noticed a visible improvement after just one use. My hair instantly felt smoother and looked so much healthier, like I'd just left the salon."
         },
         {
             "id": "r2",
             "name": "Lea",
             "photo": "",
             "rating": 5,
-            "quote": "Gives a light lamination effect after washing — hair looks glossy."
+            "quote": "The texture of my hair changed immediately. It feels incredibly soft and silky, with a healthy shine that doesn't feel heavy or greasy at all."
         },
         {
             "id": "r3",
             "name": "Noor",
             "photo": "",
             "rating": 5,
-            "quote": "Leaves hair shiny and healthy-looking; deeply nourishes the strands."
+            "quote": "Not only does it give an instant glow, but my hair feels nourished for days. The softness lasts until my next wash, which is rare for oils."
         }
     ],
     "createdAt": "2025-12-01"

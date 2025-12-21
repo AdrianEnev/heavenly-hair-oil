@@ -59,7 +59,9 @@ export function Header() {
                     <Button
                         variant="outline"
                         size="sm"
-                        href="#shop"
+                        onClick={() => {
+                            alert("Amazon link here");
+                        }}
                         className={cn(
                             "ml-2 transition-all duration-300 border-[var(--color-dusty-pink)] text-[var(--color-dusty-pink)] hover:bg-[var(--color-dusty-pink)] hover:text-[var(--color-brand-purple)]",
                             isScrolled ? "shadow-md bg-transparent" : "bg-transparent/10 backdrop-blur-sm"

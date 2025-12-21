@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-    --color-brand-purple: #3A2346;
-    --color-brand-purple-600: #3A2346;
+    --color-brand-purple: #241624;
+    --color-brand-purple-600: #241624;
     --color-dusty-pink: #E6B8C0;
     --color-text-light: #F9F5F1;
     --color-bg-cream: #F7F5F7;
@@ -13,6 +13,7 @@
 :root {
     --background: var(--color-bg-cream);
     --foreground: var(--color-brand-purple);
+    scroll-behavior: smooth;
 }
 
 body {

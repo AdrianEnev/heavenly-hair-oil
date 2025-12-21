@@ -32,7 +32,7 @@ export function ProductSummary() {
                                     <div className="mt-1 bg-[var(--color-dusty-pink)]/20 p-1 rounded-full">
                                         <Zap className="w-4 h-4 text-[var(--color-brand-purple)]" />
                                     </div>
-                                    <span className="text-[var(--color-muted-gray)]">Light lamination effect after washing</span>
+                                    <span className="text-[var(--color-muted-gray)]">Instant glass-like polish after washing</span>
                                 </li>
                                 <li className="flex items-start gap-3">
                                     <div className="mt-1 bg-[var(--color-dusty-pink)]/20 p-1 rounded-full">

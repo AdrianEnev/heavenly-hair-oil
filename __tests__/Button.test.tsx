@@ -23,4 +23,13 @@ describe('Button', () => {
         expect(link).toHaveAttribute('target', '_blank')
         expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     })
+
+    it('renders a hash link as an anchor tag for smooth scrolling', () => {
+        render(<Button href="#section">Hash Link</Button>)
+        const link = screen.getByRole('link', { name: /hash link/i })
+        expect(link).toBeInTheDocument()
+        expect(link).toHaveAttribute('href', '#section')
+        expect(link.tagName).toBe('A')
+    })
+
 })
