@@ -10,42 +10,29 @@ export function ProductSummary() {
                         Natural & Organic
                     </span>
                     <h2 className="text-3xl font-serif text-[var(--color-brand-purple)] md:text-4xl">
-                        Why It Works
+                        7 Key Benefits of Heavenly Hair Oil
                     </h2>
-                    <p className="text-[var(--color-muted-gray)] text-lg">
-                        {product.shortDescription}
-                    </p>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="space-y-8">
                         <div>
-                            <h3 className="text-xl font-medium text-[var(--color-brand-purple)] mb-4">Key Benefits</h3>
-                            <ul className="space-y-4">
-                                <li className="flex items-start gap-3">
-                                    <div className="mt-1 bg-[var(--color-dusty-pink)]/20 p-1 rounded-full">
-                                        <Check className="w-4 h-4 text-[var(--color-brand-purple)]" />
-                                    </div>
-                                    <span className="text-[var(--color-muted-gray)]">Deeply softens the hair</span>
-                                </li>
-                                <li className="flex items-start gap-3">
-                                    <div className="mt-1 bg-[var(--color-dusty-pink)]/20 p-1 rounded-full">
-                                        <Zap className="w-4 h-4 text-[var(--color-brand-purple)]" />
-                                    </div>
-                                    <span className="text-[var(--color-muted-gray)]">Light lamination effect after washing</span>
-                                </li>
-                                <li className="flex items-start gap-3">
-                                    <div className="mt-1 bg-[var(--color-dusty-pink)]/20 p-1 rounded-full">
-                                        <Droplet className="w-4 h-4 text-[var(--color-brand-purple)]" />
-                                    </div>
-                                    <span className="text-[var(--color-muted-gray)]">Makes hair very soft — especially the ends</span>
-                                </li>
-                                <li className="flex items-start gap-3">
-                                    <div className="mt-1 bg-[var(--color-dusty-pink)]/20 p-1 rounded-full">
-                                        <Star className="w-4 h-4 text-[var(--color-brand-purple)]" />
-                                    </div>
-                                    <span className="text-[var(--color-muted-gray)]">Deeply nourishes for lasting shine</span>
-                                </li>
+                            <ul className="space-y-6">
+                                {product.benefits.map((benefit, index) => (
+                                    <li key={index} className="flex items-start gap-3">
+                                        <div className="mt-1 bg-[var(--color-dusty-pink)]/20 p-1 rounded-full shrink-0">
+                                            <Check className="w-4 h-4 text-[var(--color-brand-purple)]" />
+                                        </div>
+                                        <div>
+                                            <span className="block font-bold text-[var(--color-brand-purple)] mb-1">
+                                                {benefit.title}
+                                            </span>
+                                            <span className="text-[var(--color-muted-gray)] leading-relaxed">
+                                                {benefit.description}
+                                            </span>
+                                        </div>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
 

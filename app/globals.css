@@ -1,23 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-purple: #2C0F3B;
-  --color-brand-purple-600: #3C1950;
-  --color-dusty-pink: #D9A1AB;
-  --color-bg-cream: #F7F5F7;
-  --color-muted-gray: #9B98A0;
-  --color-accent-gold: #C9A66B;
+    --color-brand-purple: #241624;
+    --color-brand-purple-600: #241624;
+    --color-dusty-pink: #E6B8C0;
+    --color-text-light: #F9F5F1;
+    --color-bg-cream: #F7F5F7;
+    --color-muted-gray: #B0A8B5;
+    --color-accent-gold: #D4AF37;
 }
 
 :root {
-  --background: var(--color-bg-cream);
-  --foreground: var(--color-brand-purple);
+    --background: var(--color-bg-cream);
+    --foreground: var(--color-brand-purple);
+    scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans, system-ui, sans-serif);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans, system-ui, sans-serif);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+    .perspective-1000 {
+        perspective: 1000px;
+    }
+}
+
+@keyframes pulse-slow {
+
+    0%,
+    100% {
+        opacity: 0.6;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.4;
+        transform: scale(1.05);
+    }
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

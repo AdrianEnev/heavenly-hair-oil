@@ -2,13 +2,50 @@
     "id": "hair-oil-1",
     "slug": "heavenly-hair-oil",
     "name": "Heavenly Hair Oil",
-    "subtitle": "Deep nourishment, light lamination, signature shine",
+    "subtitle": "Deep nourishment, instant polish, signature shine",
     "shortDescription": "A lightweight blend of organic oils that deeply nourishes, softens and adds healthy shine — especially to the ends.",
-    "longDescription": "Our signature Heavenly Hair Oil is crafted with a luxurious blend of natural organic oils designed to transform dry, dull strands into glossy, touchably soft hair. Experience a light lamination effect that seals in moisture without weighing your hair down. Perfect for revitalizing split ends and adding a brilliant, healthy-looking shine to every strand.",
+    "longDescription": "Our signature Heavenly Hair Oil is crafted with a luxurious blend of natural organic oils designed to transform dry, dull strands into glossy, touchably soft hair. Experience a glass-like finish that seals in moisture without weighing your hair down. Perfect for revitalizing split ends and adding a brilliant, healthy-looking shine to every strand.",
     "colors": {
         "brand": "#2C0F3B",
         "accent": "#D9A1AB"
     },
+    "hero": {
+        "headline": "Stronger. Softer. Shinier Hair Naturally.",
+        "subheading": "Powered by grape seed, camellia, rosemary, ginger, turmeric root, and vitamin E.",
+        "description": "Heavenly Hair Oil is designed to penetrate deeply into the hair to moisturize, protect, and revive from root to tip. Hair feels healthier, smoother, and more manageable, with visible results from the very first use.",
+        "primaryButton": "Transform Your Hair",
+        "secondaryButton": "See the Benefits"
+    },
+    "benefits": [
+        {
+            "title": "Deep moisturizing",
+            "description": "Penetrates the hair shaft to restore long-lasting hydration and help prevent dryness."
+        },
+        {
+            "title": "Incredible softness",
+            "description": "Hair feels noticeably softer, smoother, and silkier from the first application."
+        },
+        {
+            "title": "Healthy shine",
+            "description": "Enhances the hair's natural gloss without leaving a greasy or heavy finish."
+        },
+        {
+            "title": "Strength and protection",
+            "description": "Helps reduce breakage while supporting stronger, healthier-looking hair."
+        },
+        {
+            "title": "Healthy growth",
+            "description": "Rosemary, ginger, and turmeric root help stimulate the scalp and support hair growth."
+        },
+        {
+            "title": "Frizz control with a smooth finish",
+            "description": "Tames flyaways and frizz for a polished, salon-quality look."
+        },
+        {
+            "title": "Lightweight and non-greasy",
+            "description": "Absorbs quickly and works well for all hair types, including fine hair."
+        }
+    ],
     "images": [
         {
             "src": "/images/hair_oil_front.jpeg",
@@ -26,48 +63,83 @@
         },
         {
             "name": "Camellia Oil",
-            "note": "Provides hair with hydration and nourishment"
+            "note": "Hydration and nourishment"
         },
         {
             "name": "Rosemary Oil",
-            "note": "Stimulates hair follicles and improves blood circulation to the scalp"
+            "note": "Revitalisation of hair follicles and improvement of blood circulation to the scalp"
         },
         {
             "name": "Vitamin E",
-            "note": "Promotes healthy hair growth"
+            "note": "Healthy hair growth"
         },
         {
             "name": "Ginger Oil",
-            "note": "Supports hair retention"
+            "note": "Hair strength and retention"
         },
         {
-            "name": "Turmeric Root",
-            "note": "Leads to increased hair growth"
+            "name": "Turmeric Oil",
+            "note": "Hair growth"
         }
     ],
-    "amazonUrl": "https://www.amazon.example/product",
-    "etsyUrl": "https://www.etsy.example/product",
+    "amazonUrl": "https://www.amazon.com",
+    "etsyUrl": "https://www.etsy.com",
     "reviews": [
         {
             "id": "r1",
-            "name": "Maya",
+            "name": "Emily R.",
             "photo": "",
             "rating": 5,
-            "quote": "Deeply softens the hair and makes my ends feel renewed."
+            "quote": "My hair has never felt this soft. I noticed a difference after the first use. My hair is smoother, shinier, and feels incredibly healthy.",
+            "headline": "My hair has never felt this soft."
         },
         {
             "id": "r2",
-            "name": "Lea",
+            "name": "Sophie M.",
             "photo": "",
             "rating": 5,
-            "quote": "Gives a light lamination effect after washing — hair looks glossy."
+            "quote": "I love that it doesn’t weigh my hair down. Perfect for daily use.",
+            "headline": "Lightweight but super moisturizing."
         },
         {
             "id": "r3",
-            "name": "Noor",
+            "name": "Laura T.",
             "photo": "",
             "rating": 5,
-            "quote": "Leaves hair shiny and healthy-looking; deeply nourishes the strands."
+            "quote": "My hair looks glossy and frizz-free, like I’ve just left the salon.",
+            "headline": "Salon results at home."
+        },
+        {
+            "id": "r4",
+            "name": "Hannah B.",
+            "photo": "",
+            "rating": 5,
+            "quote": "I’ve tried so many hair oils, but this one actually absorbs and works.",
+            "headline": "Finally found my holy grail oil."
+        },
+        {
+            "id": "r5",
+            "name": "Jessica K.",
+            "photo": "",
+            "rating": 5,
+            "quote": "After a few weeks, I noticed less breakage and healthier ends.",
+            "headline": "My hair feels stronger."
+        },
+        {
+            "id": "r6",
+            "name": "Natalie P.",
+            "photo": "",
+            "rating": 5,
+            "quote": "The scent is subtle and luxurious, and my hair feels amazing.",
+            "headline": "Smells divine and works beautifully."
+        },
+        {
+            "id": "r7",
+            "name": "Olivia S.",
+            "photo": "",
+            "rating": 5,
+            "quote": "I use it on my ends every morning and get instant softness and shine.",
+            "headline": "Perfect for dry ends."
         }
     ],
     "createdAt": "2025-12-01"

@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
@@ -30,7 +32,32 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
         const combinedClassName = cn(baseStyles, variants[variant], sizes[size], className)
 
+        // Handle smooth scrolling for hash links
+        const handleHashClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+            if (href?.startsWith('#')) {
+                e.preventDefault()
+                const element = document.querySelector(href)
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                }
+            }
+        }
+
         if (href) {
+            // Hash links for smooth scrolling
+            if (href.startsWith('#')) {
+                return (
+                    <a
+                        href={href}
+                        className={combinedClassName}
+                        onClick={handleHashClick}
+                    >
+                        {children}
+                    </a>
+                )
+            }
+
+            // External links
             if (external) {
                 return (
                     <a
@@ -43,6 +70,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
                     </a>
                 )
             }
+
+            // Internal Next.js links
             return (
                 <Link href={href} className={combinedClassName}>
                     {children}
