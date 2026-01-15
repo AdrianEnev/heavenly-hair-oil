@@ -6,17 +6,17 @@ export function Ingredients() {
             <div className="container mx-auto px-4 md:px-6">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     {/* Image Side - Left */}
-                    <div className="relative aspect-square md:aspect-[4/5] bg-[var(--color-bg-cream)] rounded-2xl overflow-hidden order-2 md:order-1">
+                    <div className="relative bg-[var(--color-bg-cream)] rounded-2xl overflow-hidden order-2 md:order-1">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            src="/images/hair_oil_packaging.jpeg"
+                            src="/images/hair_oil_packaging_crop_large.jpg"
                             alt="Heavenly Hair Oil Ingredients Label"
-                            className="w-full h-full object-cover"
+                            className="w-full h-auto scale-[1.1]"
                         />
                     </div>
 
                     {/* Content Side - Right */}
-                    <div className="space-y-8 order-1 md:order-2">
+                    <div className="space-y-8 order-1 md:order-2 max-w-[80%]">
                         <div>
                             <span className="inline-block px-3 py-1 rounded-full bg-[var(--color-dusty-pink)]/10 text-[var(--color-brand-purple)] text-sm font-medium mb-4">
                                 Pure & Potent

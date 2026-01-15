@@ -22,16 +22,17 @@ export function Hero() {
                                     The Ritual
                                 </span>
                             </div>
-                            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl leading-tight text-[var(--color-text-light)]">
-                                <span className="block mb-2 text-[var(--color-dusty-pink)] opacity-90 text-3xl md:text-4xl italic font-light">
-                                    Heavenly Hair Oil
-                                </span>
-                                The Ultimate Elixir <br />
-                                <span className="italic font-light opacity-80">for Radiance</span>
+                            <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-tight text-[var(--color-text-light)]">
+                                {product.hero.headline}
                             </h1>
-                            <p className="max-w-[540px] text-lg md:text-xl font-light leading-relaxed text-[var(--color-muted-gray)]">
-                                Deeply nourishing, instantly transformative. Give your hair the treatment it deserves with our signature blend of rare, organic oils.
-                            </p>
+                            <div className="space-y-4">
+                                <p className="text-xl md:text-2xl font-light text-[var(--color-dusty-pink)]">
+                                    {product.hero.subheading}
+                                </p>
+                                <p className="max-w-[540px] text-lg font-light leading-relaxed text-[var(--color-muted-gray)]">
+                                    {product.hero.description}
+                                </p>
+                            </div>
                         </div>
 
                         <div className="flex flex-col sm:flex-row gap-5 pt-4">
@@ -41,16 +42,15 @@ export function Hero() {
                                 size="lg"
                                 className="bg-[var(--color-dusty-pink)] text-[var(--color-brand-purple)] hover:bg-[var(--color-text-light)] transition-all duration-300 shadow-[0_0_20px_rgba(217,161,171,0.3)] border-none"
                             >
-                                Shop on Amazon
+                                {product.hero.primaryButton}
                             </Button>
                             <Button
                                 variant="outline"
-                                href={product.etsyUrl}
-                                external
+                                href="#benefits"
                                 size="lg"
                                 className="border-[var(--color-dusty-pink)] text-[var(--color-dusty-pink)] hover:bg-[var(--color-dusty-pink)] hover:text-[var(--color-brand-purple)] transition-all duration-300"
                             >
-                                Shop on Etsy
+                                {product.hero.secondaryButton}
                             </Button>
                         </div>
 
