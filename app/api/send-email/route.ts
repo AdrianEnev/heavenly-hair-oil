@@ -1,12 +1,14 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses'
+import nodemailer from 'nodemailer'
 
-// Initialize SES client
-const sesClient = new SESClient({
-    region: 'us-east-1', // Match your SES_SMTP_HOST region
-    credentials: {
-        accessKeyId: process.env.SES_SMTP_USER || '',
-        secretAccessKey: process.env.SES_SMTP_PASS || '',
+// Initialize Nodemailer transporter
+const transporter = nodemailer.createTransport({
+    host: process.env.SES_SMTP_HOST,
+    port: Number(process.env.SES_SMTP_PORT) || 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: process.env.SES_SMTP_USER,
+        pass: process.env.SES_SMTP_PASS,
     },
 })
 
@@ -41,68 +43,13 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        // Prepare email parameters
-        const emailParams = {
-            Source: `${process.env.EMAIL_FROM_NAME} <${process.env.EMAIL_FROM}>`,
-            Destination: {
-                ToAddresses: [process.env.EMAIL_FROM || ''], // Send to your own email
-            },
-            Message: {
-                Subject: {
-                    Data: `Contact Form: ${subject}`,
-                    Charset: 'UTF-8',
-                },
-                Body: {
-                    Html: {
-                        Data: `
-                            <!DOCTYPE html>
-                            <html>
-                            <head>
-                                <style>
-                                    body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-                                    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                                    .header { background: linear-gradient(135deg, #6B46C1 0%, #805AD5 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0; }
-                                    .content { background: #f9f9f9; padding: 20px; border: 1px solid #e0e0e0; }
-                                    .field { margin-bottom: 15px; }
-                                    .label { font-weight: bold; color: #6B46C1; }
-                                    .value { margin-top: 5px; padding: 10px; background: white; border-radius: 4px; }
-                                    .footer { background: #f9f9f9; padding: 15px; text-align: center; font-size: 12px; color: #666; border-radius: 0 0 8px 8px; }
-                                </style>
-                            </head>
-                            <body>
-                                <div class="container">
-                                    <div class="header">
-                                        <h2 style="margin: 0;">New Contact Form Submission</h2>
-                                    </div>
-                                    <div class="content">
-                                        <div class="field">
-                                            <div class="label">From:</div>
-                                            <div class="value">${name}</div>
-                                        </div>
-                                        <div class="field">
-                                            <div class="label">Email:</div>
-                                            <div class="value"><a href="mailto:${email}">${email}</a></div>
-                                        </div>
-                                        <div class="field">
-                                            <div class="label">Subject:</div>
-                                            <div class="value">${subject}</div>
-                                        </div>
-                                        <div class="field">
-                                            <div class="label">Message:</div>
-                                            <div class="value">${message.replace(/\n/g, '<br>')}</div>
-                                        </div>
-                                    </div>
-                                    <div class="footer">
-                                        Sent from Heavenly Hair Oil Contact Form
-                                    </div>
-                                </div>
-                            </body>
-                            </html>
-                        `,
-                        Charset: 'UTF-8',
-                    },
-                    Text: {
-                        Data: `
+        // Prepare email content
+        const mailOptions = {
+            from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_FROM}>`,
+            to: process.env.EMAIL_FROM, // Send to your own email
+            replyTo: email, // Allow direct reply to the sender
+            subject: `Contact Form: ${subject}`,
+            text: `
 New Contact Form Submission
 
 From: ${name}
@@ -114,17 +61,56 @@ ${message}
 
 ---
 Sent from Heavenly Hair Oil Contact Form
-                        `.trim(),
-                        Charset: 'UTF-8',
-                    },
-                },
-            },
-            ReplyToAddresses: [email], // Allow direct reply to the sender
+            `.trim(),
+            html: `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <style>
+                        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+                        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+                        .header { background: linear-gradient(135deg, #6B46C1 0%, #805AD5 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+                        .content { background: #f9f9f9; padding: 20px; border: 1px solid #e0e0e0; }
+                        .field { margin-bottom: 15px; }
+                        .label { font-weight: bold; color: #6B46C1; }
+                        .value { margin-top: 5px; padding: 10px; background: white; border-radius: 4px; }
+                        .footer { background: #f9f9f9; padding: 15px; text-align: center; font-size: 12px; color: #666; border-radius: 0 0 8px 8px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="header">
+                            <h2 style="margin: 0;">New Contact Form Submission</h2>
+                        </div>
+                        <div class="content">
+                            <div class="field">
+                                <div class="label">From:</div>
+                                <div class="value">${name}</div>
+                            </div>
+                            <div class="field">
+                                <div class="label">Email:</div>
+                                <div class="value"><a href="mailto:${email}">${email}</a></div>
+                            </div>
+                            <div class="field">
+                                <div class="label">Subject:</div>
+                                <div class="value">${subject}</div>
+                            </div>
+                            <div class="field">
+                                <div class="label">Message:</div>
+                                <div class="value">${message.replace(/\n/g, '<br>')}</div>
+                            </div>
+                        </div>
+                        <div class="footer">
+                            Sent from Heavenly Hair Oil Contact Form
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `,
         }
 
-        // Send email via SES
-        const command = new SendEmailCommand(emailParams)
-        await sesClient.send(command)
+        // Send email via Nodemailer
+        await transporter.sendMail(mailOptions)
 
         return NextResponse.json(
             { message: 'Email sent successfully' },
@@ -138,3 +124,4 @@ Sent from Heavenly Hair Oil Contact Form
         )
     }
 }
+
