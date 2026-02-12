@@ -10,6 +10,7 @@ export function ContactForm() {
         email: "",
         subject: "",
         message: "",
+        _gotcha: "",
     })
     const [isSubmitting, setIsSubmitting] = useState(false)
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
@@ -32,7 +33,7 @@ export function ContactForm() {
 
             if (response.ok) {
                 setSubmitStatus("success")
-                setFormState({ name: "", email: "", subject: "", message: "" })
+                setFormState({ name: "", email: "", subject: "", message: "", _gotcha: "" })
 
                 // Reset success message after 5 seconds
                 setTimeout(() => setSubmitStatus("idle"), 5000)
@@ -263,6 +264,20 @@ export function ContactForm() {
                                             rows={6}
                                             className="w-full px-4 py-3.5 border border-[var(--color-brand-purple)]/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-[var(--color-dusty-pink)] focus:border-transparent transition-all resize-none"
                                             placeholder="Tell us what's on your mind..."
+                                        />
+                                    </div>
+
+                                    {/* Honeypot Field - Hidden from users */}
+                                    <div style={{ display: "none" }} aria-hidden="true">
+                                        <label htmlFor="_gotcha">Don't fill this out if you're human:</label>
+                                        <input
+                                            type="text"
+                                            id="_gotcha"
+                                            name="_gotcha"
+                                            value={formState._gotcha}
+                                            onChange={handleChange}
+                                            tabIndex={-1}
+                                            autoComplete="off"
                                         />
                                     </div>
 

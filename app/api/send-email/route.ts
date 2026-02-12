@@ -12,19 +12,67 @@ const transporter = nodemailer.createTransport({
     },
 })
 
+// Rate Limiting Configuration
+const RATE_LIMIT_WINDOW = 60 * 1000 // 1 minute
+const MAX_REQUESTS_PER_WINDOW = 3
+const ipRequestMap = new Map<string, { count: number; lastRequest: number }>()
+
 // Type for the request body
 interface ContactFormData {
     name: string
     email: string
     subject: string
     message: string
+    _gotcha?: string // Honeypot field
 }
 
 export async function POST(request: NextRequest) {
     try {
         // Parse and validate request body
         const body: ContactFormData = await request.json()
-        const { name, email, subject, message } = body
+        const { name, email, subject, message, _gotcha } = body
+
+        // Honeypot check: If _gotcha is filled, it's a bot.
+        // Return success to fool the bot, but don't send email.
+        if (_gotcha) {
+            console.log('Bot detected via honeypot. Request ignored.')
+            return NextResponse.json(
+                { message: 'Email sent successfully' },
+                { status: 200 }
+            )
+        }
+
+        // Rate Limiting
+        const ip = request.headers.get('x-forwarded-for') || 'unknown'
+        const now = Date.now()
+        const clientData = ipRequestMap.get(ip)
+
+        if (clientData) {
+            if (now - clientData.lastRequest < RATE_LIMIT_WINDOW) {
+                if (clientData.count >= MAX_REQUESTS_PER_WINDOW) {
+                    return NextResponse.json(
+                        { error: 'Too many requests. Please try again later.' },
+                        { status: 429 }
+                    )
+                }
+                clientData.count++
+            } else {
+                // Reset window
+                clientData.count = 1
+                clientData.lastRequest = now
+            }
+        } else {
+            ipRequestMap.set(ip, { count: 1, lastRequest: now })
+        }
+
+        // Cleanup old entries (simple garbage collection)
+        if (ipRequestMap.size > 1000) {
+            for (const [key, value] of ipRequestMap.entries()) {
+                if (now - value.lastRequest > RATE_LIMIT_WINDOW) {
+                    ipRequestMap.delete(key)
+                }
+            }
+        }
 
         // Validate required fields
         if (!name || !email || !subject || !message) {
