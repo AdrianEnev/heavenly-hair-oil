@@ -10,7 +10,7 @@ export function ProductSummary() {
                         Natural & Organic
                     </span>
                     <h2 className="text-3xl font-serif text-[var(--color-brand-purple)] md:text-4xl">
-                        7 Key Benefits of Heavenly Hair Oil
+                        Key Benefits of Heavenly Hair Oil
                     </h2>
                 </div>
 

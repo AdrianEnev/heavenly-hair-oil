@@ -4,6 +4,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/Button"
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
+import product from "@/data/products/hair-oil.json"
 
 export function Header() {
     const [isScrolled, setIsScrolled] = useState(false)
@@ -57,11 +58,20 @@ export function Header() {
                         Reviews
                     </Button>
                     <Button
+                        variant="ghost"
+                        href="/contact"
+                        className={cn(
+                            "hidden md:inline-flex hover:scale-105 transition-all duration-300 font-light tracking-wide",
+                            "text-[var(--color-text-light)] hover:text-[var(--color-dusty-pink)] hover:bg-transparent"
+                        )}
+                    >
+                        Contact
+                    </Button>
+                    <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => {
-                            alert("Amazon link here");
-                        }}
+                        href={product.amazonUrl}
+                        external
                         className={cn(
                             "ml-2 transition-all duration-300 border-[var(--color-dusty-pink)] text-[var(--color-dusty-pink)] hover:bg-[var(--color-dusty-pink)] hover:text-[var(--color-brand-purple)]",
                             isScrolled ? "shadow-md bg-transparent" : "bg-transparent/10 backdrop-blur-sm"

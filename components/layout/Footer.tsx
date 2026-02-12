@@ -33,8 +33,8 @@ export function Footer() {
                 <div className="border-t border-white/10 pt-8 mt-8 flex flex-col md:flex-row justify-between items-center text-sm text-[var(--color-muted-gray)]">
                     <p>&copy; {new Date().getFullYear()} Heavenly Hair Oil. All rights reserved.</p>
                     <div className="flex gap-4 mt-4 md:mt-0">
-                        <a href="#" className="hover:text-white">Instagram</a>
-                        <a href="#" className="hover:text-white">Contact</a>
+                        <a href="https://www.instagram.com/k.a.natural?igsh=M2JrdWV3b291bWQ3&utm_source=qr" target="_blank" rel="noopener noreferrer" className="hover:text-white">Instagram</a>
+                        <a href="/contact" className="hover:text-white">Contact</a>
                     </div>
                 </div>
             </div>

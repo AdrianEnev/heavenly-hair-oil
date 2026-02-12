@@ -48,7 +48,7 @@
     ],
     "images": [
         {
-            "src": "/images/hair_oil_front.jpeg",
+            "src": "/images/oil_background_square.jpeg",
             "alt": "Heavenly Hair Oil bottle on marble"
         },
         {
@@ -82,8 +82,8 @@
             "note": "Hair growth"
         }
     ],
-    "amazonUrl": "https://www.amazon.com",
-    "etsyUrl": "https://www.etsy.com",
+    "amazonUrl": "https://www.amazon.co.uk/dp/B0FLY6LT8Q",
+    "etsyUrl": "https://www.etsy.com/uk/listing/4396877700/organic-heavenly-hair-oil-for-growth-and?ref=share_ios_native_control",
     "reviews": [
         {
             "id": "r1",
