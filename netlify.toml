@@ -2,5 +2,14 @@
   command = "npm run build"
   publish = ".next"
 
+[build.environment]
+  SES_SMTP_HOST = "${SES_SMTP_HOST}"
+  SES_SMTP_PORT = "${SES_SMTP_PORT}"
+  SES_SMTP_USER = "${SES_SMTP_USER}"
+  SES_SMTP_PASS = "${SES_SMTP_PASS}"
+  EMAIL_FROM = "${EMAIL_FROM}"
+  EMAIL_FROM_NAME = "${EMAIL_FROM_NAME}"
+  EMAIL_SUPPORT = "${EMAIL_SUPPORT}"
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
