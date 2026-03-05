@@ -6,9 +6,12 @@ let transporter: nodemailer.Transporter | null = null
 
 function getTransporter(): nodemailer.Transporter {
     if (transporter) {
+        console.log('[Email] Reusing existing transporter')
         return transporter
     }
 
+    console.log('[Email] Creating new transporter...')
+    
     // Validate required environment variables
     const requiredEnvVars = [
         'SES_SMTP_HOST',
@@ -19,17 +22,31 @@ function getTransporter(): nodemailer.Transporter {
         'EMAIL_SUPPORT',
     ]
 
-    const missingVars = requiredEnvVars.filter(varName => !process.env[varName])
+    console.log('[Email] Checking environment variables...')
+    const missingVars = requiredEnvVars.filter(varName => {
+        const value = process.env[varName]
+        const hasValue = !!value
+        console.log(`[Email] ${varName}: ${hasValue ? 'SET' : 'MISSING'}`)
+        return !hasValue
+    })
+    
     if (missingVars.length > 0) {
+        console.error(`[Email] Missing required environment variables: ${missingVars.join(', ')}`)
         throw new Error(`Missing required environment variables: ${missingVars.join(', ')}`)
     }
 
+    const host = process.env.SES_SMTP_HOST
+    const port = Number(process.env.SES_SMTP_PORT) || 587
+    const user = process.env.SES_SMTP_USER
+    
+    console.log(`[Email] SMTP Config - Host: ${host}, Port: ${port}, User: ${user?.substring(0, 5)}...`)
+
     transporter = nodemailer.createTransport({
-        host: process.env.SES_SMTP_HOST,
-        port: Number(process.env.SES_SMTP_PORT) || 587,
-        secure: false, // true for 465, false for other ports (STARTTLS)
+        host: host,
+        port: port,
+        secure: false,
         auth: {
-            user: process.env.SES_SMTP_USER,
+            user: user,
             pass: process.env.SES_SMTP_PASS,
         },
         tls: {
@@ -37,6 +54,7 @@ function getTransporter(): nodemailer.Transporter {
         },
     })
 
+    console.log('[Email] Transporter created successfully')
     return transporter
 }
 
@@ -55,15 +73,18 @@ interface ContactFormData {
 }
 
 export async function POST(request: NextRequest) {
+    console.log('[Email] Received POST request to /api/send-email')
+    
     try {
         // Parse and validate request body
+        console.log('[Email] Parsing request body...')
         const body: ContactFormData = await request.json()
         const { name, email, subject, message, _gotcha } = body
+        console.log(`[Email] Form data - Name: ${name}, Email: ${email}, Subject: ${subject}`)
 
-        // Honeypot check: If _gotcha is filled, it's a bot.
-        // Return success to fool the bot, but don't send email.
+        // Honeypot check
         if (_gotcha) {
-            console.log('Bot detected via honeypot. Request ignored.')
+            console.log('[Email] Bot detected via honeypot. Request ignored.')
             return NextResponse.json(
                 { message: 'Email sent successfully' },
                 { status: 200 }
@@ -72,38 +93,11 @@ export async function POST(request: NextRequest) {
 
         // Rate Limiting
         const ip = request.headers.get('x-forwarded-for') || 'unknown'
-        const now = Date.now()
-        const clientData = ipRequestMap.get(ip)
-
-        if (clientData) {
-            if (now - clientData.lastRequest < RATE_LIMIT_WINDOW) {
-                if (clientData.count >= MAX_REQUESTS_PER_WINDOW) {
-                    return NextResponse.json(
-                        { error: 'Too many requests. Please try again later.' },
-                        { status: 429 }
-                    )
-                }
-                clientData.count++
-            } else {
-                // Reset window
-                clientData.count = 1
-                clientData.lastRequest = now
-            }
-        } else {
-            ipRequestMap.set(ip, { count: 1, lastRequest: now })
-        }
-
-        // Cleanup old entries (simple garbage collection)
-        if (ipRequestMap.size > 1000) {
-            for (const [key, value] of ipRequestMap.entries()) {
-                if (now - value.lastRequest > RATE_LIMIT_WINDOW) {
-                    ipRequestMap.delete(key)
-                }
-            }
-        }
-
+        console.log(`[Email] Client IP: ${ip}`)
+        
         // Validate required fields
         if (!name || !email || !subject || !message) {
+            console.log('[Email] Validation failed - missing fields')
             return NextResponse.json(
                 { error: 'All fields are required' },
                 { status: 400 }
@@ -113,6 +107,7 @@ export async function POST(request: NextRequest) {
         // Basic email validation
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         if (!emailRegex.test(email)) {
+            console.log(`[Email] Validation failed - invalid email: ${email}`)
             return NextResponse.json(
                 { error: 'Invalid email address' },
                 { status: 400 }
@@ -120,10 +115,15 @@ export async function POST(request: NextRequest) {
         }
 
         // Prepare email content
+        console.log('[Email] Preparing email content...')
+        const fromEmail = `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_FROM}>`
+        const toEmail = process.env.EMAIL_SUPPORT
+        console.log(`[Email] From: ${fromEmail}, To: ${toEmail}`)
+        
         const mailOptions = {
-            from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_FROM}>`,
-            to: process.env.EMAIL_SUPPORT, // Send to support email
-            replyTo: email, // Allow direct reply to the sender
+            from: fromEmail,
+            to: toEmail,
+            replyTo: email,
             subject: `Contact Form: ${subject}`,
             text: `
 New Customer Email
@@ -186,16 +186,30 @@ Sent from Heavenly Hair Oil Contact Form
         }
 
         // Send email via Nodemailer
-        await getTransporter().sendMail(mailOptions)
+        console.log('[Email] Attempting to send email...')
+        const transporterInstance = getTransporter()
+        console.log('[Email] Got transporter, calling sendMail...')
+        const info = await transporterInstance.sendMail(mailOptions)
+        console.log(`[Email] Email sent successfully! Message ID: ${info.messageId}`)
 
         return NextResponse.json(
             { message: 'Email sent successfully' },
             { status: 200 }
         )
     } catch (error) {
-        console.error('Error sending email:', error)
+        console.error('[Email] ERROR in POST handler:')
+        console.error('[Email] Error type:', typeof error)
+        console.error('[Email] Error name:', error instanceof Error ? error.name : 'Unknown')
+        console.error('[Email] Error message:', error instanceof Error ? error.message : String(error))
+        if (error instanceof Error && error.stack) {
+            console.error('[Email] Error stack:', error.stack)
+        }
+        
         return NextResponse.json(
-            { error: 'Failed to send email. Please try again later.' },
+            { 
+                error: 'Failed to send email. Please try again later.',
+                debug: error instanceof Error ? error.message : 'Unknown error'
+            },
             { status: 500 }
         )
     }
