@@ -7,7 +7,7 @@ export function Footer() {
             <div className="container mx-auto px-4 md:px-6 text-center">
                 <h2 className="text-3xl font-serif mb-6">Experience Heavenly Hair</h2>
                 <p className="mb-10 text-[var(--color-muted-gray)] max-w-lg mx-auto">
-                    Deeply nourishing, lightweight, and made from nature's finest organic oils.
+                    Deeply nourishing, lightweight, and made from  finest organic oils.
                     Available now on your favorite marketplaces.
                 </p>
 

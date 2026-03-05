@@ -3,10 +3,17 @@ import product from "@/data/products/hair-oil.json"
 
 export function ProductSummary() {
     return (
-        <section id="benefits" className="py-24 bg-white">
-            <div className="container mx-auto px-4 md:px-6">
+        <section id="benefits" className="py-24 bg-[var(--color-dusty-pink)]/20 relative overflow-hidden">
+            {/* Subtle gradient overlay for depth */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[var(--color-dusty-pink)]/30 via-transparent to-[var(--color-dusty-pink)]/10 pointer-events-none" />
+            
+            {/* Decorative blurred circles */}
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[var(--color-dusty-pink)]/40 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-[var(--color-deeper-pink)]/20 rounded-full blur-[80px] pointer-events-none" />
+
+            <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="max-w-3xl mx-auto text-center mb-16 space-y-4">
-                    <span className="inline-block px-3 py-1 rounded-full bg-[var(--color-dusty-pink)]/10 text-[var(--color-brand-purple)] text-sm font-medium">
+                                    <span className="inline-block px-3 py-1 rounded-full bg-white/60 text-[var(--color-brand-purple)] text-sm font-medium backdrop-blur-sm">
                         Natural & Organic
                     </span>
                     <h2 className="text-3xl font-serif text-[var(--color-brand-purple)] md:text-4xl">
@@ -27,7 +34,7 @@ export function ProductSummary() {
                                             <span className="block font-bold text-[var(--color-brand-purple)] mb-1">
                                                 {benefit.title}
                                             </span>
-                                            <span className="text-[var(--color-muted-gray)] leading-relaxed">
+                                            <span className="text-[var(--color-brand-purple)]/75 leading-relaxed">
                                                 {benefit.description}
                                             </span>
                                         </div>
@@ -45,6 +52,9 @@ export function ProductSummary() {
                     </div>
                 </div>
             </div>
+
+            {/* Bottom gradient fade to blend with next section */}
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none z-10" />
         </section>
     )
 }

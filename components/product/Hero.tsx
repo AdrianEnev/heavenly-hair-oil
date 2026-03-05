@@ -69,29 +69,9 @@ export function Hero() {
                         {/* CSS-only Glow Effect */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-gradient-radial from-[var(--color-dusty-pink)]/20 to-transparent blur-[80px]" />
 
-                        {/* Model Image - Left Pillar */}
-                        <div className="absolute left-[-10%] md:left-[-5%] top-[-15%] w-[160px] md:w-[220px] h-[460px] md:h-[600px] rounded-[60px] overflow-hidden border border-white/10 shadow-2xl hidden md:block opacity-80 hover:opacity-100 transition-all duration-700 z-0 transform -rotate-6 hover:-rotate-3 hover:scale-105">
-                            <Image
-                                src="/images/hair_blond.jpeg"
-                                alt="Radiant blonde hair results"
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 0vw, 33vw"
-                            />
-                        </div>
 
-                        {/* Model Image - Right Pillar */}
-                        <div className="absolute right-[-10%] md:right-[-5%] top-[-5%] w-[160px] md:w-[220px] h-[460px] md:h-[600px] rounded-[60px] overflow-hidden border border-white/10 shadow-2xl hidden md:block opacity-80 hover:opacity-100 transition-all duration-700 z-0 transform rotate-6 hover:rotate-3 hover:scale-105">
-                            <Image
-                                src="/images/hair_brown.jpeg"
-                                alt="Glossy brunette hair results"
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 0vw, 33vw"
-                            />
-                        </div>
 
-                        <div className="relative mx-auto w-full max-w-[400px] lg:max-w-[480px] z-10">
+                        <div className="relative mx-auto w-full max-w-[540px] lg:max-w-[640px] z-10">
                             {/* Main Image with Depth Styling */}
                             <div className="relative transform transition-transform hover:scale-[1.02] duration-700 ease-out">
                                 <div className="relative rounded-t-[60px] rounded-b-[40px] overflow-hidden shadow-2xl shadow-black/40 border border-white/5 mx-auto w-[85%]">
@@ -109,7 +89,6 @@ export function Hero() {
                             </div>
 
                             {/* Decorative Elements */}
-                            <div className="absolute -bottom-10 -right-10 w-32 h-32 border border-[var(--color-dusty-pink)]/30 rounded-full opacity-60 animate-pulse-slow" />
                             <div className="absolute top-10 -left-10 w-20 h-20 border border-[var(--color-text-light)]/10 rounded-full opacity-40" />
                         </div>
                     </div>

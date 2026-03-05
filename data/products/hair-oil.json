@@ -142,5 +142,21 @@
             "headline": "Perfect for dry ends."
         }
     ],
+    "results": {
+        "title": "Made for Every Kind of Hair",
+        "intro": "We created Heavenly Hair Oil with one simple belief — your hair is already beautiful.",
+        "paragraphs": [
+            "No matter your texture, your color, or your story, our oil is here to gently nourish, soften, and enhance what makes your hair uniquely yours. It’s not about transforming who you are. It’s about caring for yourself in a small, meaningful way each day.",
+            "Healthy, radiant hair starts with love, and that’s what we poured into every bottle."
+        ],
+        "story": {
+            "title": "Our Story",
+            "paragraphs": [
+                "We are Karolina and Anastasia, two friends who simply wanted something better for our own hair. After trying countless products, we decided to create a formula that truly works for all hair types.",
+                "Heavenly Hair Oil started as a shared dream between us, and it’s so special to stand behind something we genuinely use and love ourselves.",
+                "The faces you see here are ours, because this isn’t just a brand to us. It’s something personal. It’s something we believe in. And we’re so grateful to share it with you."
+            ]
+        }
+    },
     "createdAt": "2025-12-01"
 }

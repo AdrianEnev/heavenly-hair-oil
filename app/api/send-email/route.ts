@@ -1,16 +1,44 @@
 import { NextRequest, NextResponse } from 'next/server'
 import nodemailer from 'nodemailer'
 
-// Initialize Nodemailer transporter
-const transporter = nodemailer.createTransport({
-    host: process.env.SES_SMTP_HOST,
-    port: Number(process.env.SES_SMTP_PORT) || 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-        user: process.env.SES_SMTP_USER,
-        pass: process.env.SES_SMTP_PASS,
-    },
-})
+// Lazy initialization - transporter created only when needed
+let transporter: nodemailer.Transporter | null = null
+
+function getTransporter(): nodemailer.Transporter {
+    if (transporter) {
+        return transporter
+    }
+
+    // Validate required environment variables
+    const requiredEnvVars = [
+        'SES_SMTP_HOST',
+        'SES_SMTP_USER',
+        'SES_SMTP_PASS',
+        'EMAIL_FROM',
+        'EMAIL_FROM_NAME',
+        'EMAIL_SUPPORT',
+    ]
+
+    const missingVars = requiredEnvVars.filter(varName => !process.env[varName])
+    if (missingVars.length > 0) {
+        throw new Error(`Missing required environment variables: ${missingVars.join(', ')}`)
+    }
+
+    transporter = nodemailer.createTransport({
+        host: process.env.SES_SMTP_HOST,
+        port: Number(process.env.SES_SMTP_PORT) || 587,
+        secure: false, // true for 465, false for other ports (STARTTLS)
+        auth: {
+            user: process.env.SES_SMTP_USER,
+            pass: process.env.SES_SMTP_PASS,
+        },
+        tls: {
+            rejectUnauthorized: true,
+        },
+    })
+
+    return transporter
+}
 
 // Rate Limiting Configuration
 const RATE_LIMIT_WINDOW = 60 * 1000 // 1 minute
@@ -94,11 +122,11 @@ export async function POST(request: NextRequest) {
         // Prepare email content
         const mailOptions = {
             from: `"${process.env.EMAIL_FROM_NAME}" <${process.env.EMAIL_FROM}>`,
-            to: process.env.EMAIL_FROM, // Send to your own email
+            to: process.env.EMAIL_SUPPORT, // Send to support email
             replyTo: email, // Allow direct reply to the sender
             subject: `Contact Form: ${subject}`,
             text: `
-New Contact Form Submission
+New Customer Email
 
 From: ${name}
 Email: ${email}
@@ -128,7 +156,7 @@ Sent from Heavenly Hair Oil Contact Form
                 <body>
                     <div class="container">
                         <div class="header">
-                            <h2 style="margin: 0;">New Contact Form Submission</h2>
+                            <h2 style="margin: 0;">New Customer Email</h2>
                         </div>
                         <div class="content">
                             <div class="field">
@@ -158,7 +186,7 @@ Sent from Heavenly Hair Oil Contact Form
         }
 
         // Send email via Nodemailer
-        await transporter.sendMail(mailOptions)
+        await getTransporter().sendMail(mailOptions)
 
         return NextResponse.json(
             { message: 'Email sent successfully' },

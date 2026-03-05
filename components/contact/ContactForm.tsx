@@ -286,7 +286,7 @@ export function ContactForm() {
                                         type="submit"
                                         disabled={isSubmitting}
                                         size="lg"
-                                        className="w-full bg-[#7a3d47] text-white hover:bg-[var(--color-dusty-pink)]/90 transition-all duration-300 shadow-[0_0_20px_rgba(217,161,171,0.3)] border-none disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full bg-[var(--color-deeper-pink)] text-white hover:bg-[var(--color-dusty-pink)]/90 transition-all duration-300 shadow-lg shadow-[var(--color-dusty-pink)]/20 border-none disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
                                         {isSubmitting ? (
                                             <span className="flex items-center justify-center gap-2">
